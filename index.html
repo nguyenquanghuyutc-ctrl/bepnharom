@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Ngỏ Mời Hợp Tác - Ba Làng TH</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0F4471',
+                            red: '#DA251D',
+                            bg: '#FDFCF8',
+                            border: '#E2E8F0'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #e2e8f0; /* Outer background */
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* Paper effect for the main letter */
+        .letter-paper {
+            background-color: #ffffff;
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%230f4471" fill-opacity="0.02" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E');
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        /* Chuẩn Typography Bộ Nội Vụ + Sang xịn mịn */
+        .official-doc {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 17px; /* Cỡ chữ 13-14 chuẩn văn bản */
+            line-height: 1.6; /* Dãn dòng 1.5 lines */
+            color: #1e293b;
+        }
+        .official-doc .para {
+            text-align: justify;
+            text-indent: 2.5rem; /* Lùi đầu dòng ~1.27cm chuẩn */
+            margin-bottom: 1.2rem; /* Khoảng cách giữa các đoạn */
+        }
+        .official-doc h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #0F4471;
+            /* Headings không lùi đầu dòng */
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.7s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Envelope Cover */
+        #envelope {
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+        }
+        .envelope-open {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Elegant list styling */
+        .feature-card {
+            background: #fff;
+            border: 1px solid rgba(15, 68, 113, 0.1);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: rgba(218, 37, 29, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(15, 68, 113, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Custom Animations cho cảnh báo pháp lý */
+        @keyframes warning-blink {
+            0%, 100% { color: #0F4471; text-shadow: none; }
+            50% { color: #DA251D; text-shadow: 0 0 15px rgba(218, 37, 29, 0.3); }
+        }
+        .warning-blink {
+            animation: warning-blink 1.8s infinite;
+        }
+
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(12px); }
+        }
+        .animate-bounce-x {
+            animation: bounce-x 1s infinite;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-blue selection:text-white relative min-h-screen">
+
+    <div id="envelope" class="fixed inset-0 bg-brand-blue z-[100] flex flex-col items-center justify-center px-4">
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+        
+        <div class="relative z-10 flex flex-col items-center text-center max-w-md w-full">
+            <div class="bg-white p-6 rounded-2xl shadow-2xl mb-8">
+                <img src="https://balang.com.vn/wp-content/uploads/2023/06/LOGO-BA-LANG-TH.svg" alt="Ba Làng TH Logo" class="h-16 md:h-20 w-auto">
+            </div>
+            
+            <p class="text-white animate-pulse text-sm uppercase tracking-[0.2em] mb-4 font-bold">Tài liệu gửi riêng</p>
+            <h1 class="font-serif text-3xl md:text-4xl text-white mb-2 leading-tight">Thư Ngỏ Hợp Tác</h1>
+            <p class="text-xl text-white/90 mb-12 font-serif italic mt-2">Kính gửi: <span class="text-[#FFD700] font-bold text-2xl">Anh Hùng Rơm</span></p>
+            
+            <button id="open-btn" onclick="showPasswordInput()" class="group relative inline-flex items-center justify-center gap-3 bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-10 rounded-full shadow-[0_0_30px_rgba(218,37,29,0.4)] transition-all duration-300 hover:scale-105">
+                <i class="ph-fill ph-lock-key text-2xl group-hover:-translate-y-1 transition-transform"></i>
+                <span class="tracking-wide">MỞ CÔNG VĂN</span>
+            </button>
+
+            <!-- Password Input Container -->
+            <div id="password-container" class="hidden w-full max-w-xs mt-2 transition-all duration-300">
+                <div class="flex flex-col gap-3">
+                    <input type="password" id="doc-password" placeholder="Nhập mật khẩu..." class="w-full px-4 py-3 rounded-lg text-center text-brand-blue font-bold focus:outline-none focus:ring-4 focus:ring-brand-red/50 shadow-inner">
+                    <button onclick="checkPassword()" class="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-unlock"></i> XÁC NHẬN
+                    </button>
+                    <p id="password-error" class="text-[#FFD700] text-sm hidden font-medium mt-1">Sai mật khẩu!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" class="relative z-10 max-w-4xl mx-auto md:py-12 px-0 md:px-6 opacity-0 transition-opacity duration-1000 pb-32">
+        <div class="letter-paper official-doc md:rounded-xl p-6 sm:p-10 md:p-16 border-t-8 border-brand-blue">
+            
+            <!-- Header Công văn chuẩn hình ảnh -->
+            <header class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 reveal active">
+                <div class="flex flex-col items-start">
+                    <img src="https://balang.com.vn/wp-content/uploads/2023/06/LOGO-BA-LANG-TH.svg" alt="Ba Làng TH" class="h-16 mb-4">
+                    <p class="font-bold text-brand-blue" style="font-family: 'Times New Roman', Times, serif; font-size: 17px;">
+                        Số: 036/2026/CV-BL
+                    </p>
+                    <p class="italic text-brand-blue border-b border-brand-blue pb-1 inline-block" style="font-family: 'Times New Roman', Times, serif; font-size: 17px;">
+                        V/v: Mời hợp tác truyền thông
+                    </p>
+                </div>
+                <div class="text-left md:text-right flex flex-col md:items-end justify-center">
+                    <p class="italic text-brand-blue" style="font-family: 'Times New Roman', Times, serif; font-size: 17px;">
+                        Thanh Hóa, ngày 03/06/2026
+                    </p>
+                </div>
+            </header>
+
+            <!-- Tiêu đề & Lời mở đầu -->
+            <div class="mb-10 reveal">
+                </p>
+                
+                <p class="para">
+                    Thay mặt Ban Lãnh đạo Công ty TNHH Chế Biến Hải Sản Ba Làng — đơn vị giữ vai trò Chủ tịch Hiệp hội Nước mắm Ba Làng, thương hiệu nước mắm truyền thống 400 năm tại làng chài Hải Thanh, Thanh Hóa — chúng tôi trân trọng gửi đến anh thư ngỏ này.
+                </p>
+                <p class="para">
+                    Chúng tôi đã theo dõi kênh TikTok "Bếp nhà Rơm" và đánh giá cao phong cách làm nội dung chân thực, có chiều sâu của anh. Với hơn 198.000 người theo dõi và hơn 4,3 triệu lượt thích, anh đang sở hữu một nền tảng ảnh hưởng thực chất — thứ mà chúng tôi tôn trọng và mong muốn đồng hành đúng cách.
+                </p>
+            </div>
+
+            <!-- MỤC I -->
+            <section class="mb-12 reveal">
+                <h2>I. NĂNG LỰC & HẠ TẦNG CÔNG TY TNHH CHẾ BIẾN HẢI SẢN BA LÀNG</h2>
+                <p class="para mb-6">
+                    Không giống các hộ kinh doanh hay doanh nghiệp nhỏ lẻ trong ngành, Ba Làng TH là một doanh nghiệp được đầu tư bài bản, vận hành chuyên nghiệp với hạ tầng và pháp lý đầy đủ ở mọi tầng:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" style="font-family: 'Inter', sans-serif; font-size: 15px;">
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-factory text-xl"></i> Quy mô sản xuất</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Cơ sở sản xuất diện tích 12.000 m² tại Thanh Hóa. Dây chuyền đóng chai 10.000 chai/giờ — quy mô công nghiệp, đủ năng lực đáp ứng phân phối toàn quốc.</p>
+                    </div>
+                    
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-flask text-xl"></i> Công nghệ độc quyền</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Hệ thống thanh trùng giảm mặn DUY NHẤT tại miền Bắc Việt Nam. Quy trình ủ chượp tự nhiên 18–36 tháng, giữ nguyên hàm lượng đạm 41N.</p>
+                    </div>
+
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2 md:col-span-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-certificate text-xl"></i> Chứng nhận chất lượng</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">OCOP 4 Sao | ISO 22000 | HACCP | Công ty Khoa học Công nghệ 2023 — toàn bộ chứng nhận được cấp bởi cơ quan nhà nước có thẩm quyền, kiểm định định kỳ.</p>
+                    </div>
+
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-users text-xl"></i> Nhân sự</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Đội ngũ hơn 100 nhân sự chuyên nghiệp vận hành toàn hệ thống — từ sản xuất, kiểm soát chất lượng đến phân phối và truyền thông.</p>
+                    </div>
+
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-storefront text-xl"></i> Phân phối nội địa</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Hiện diện tại chuỗi siêu thị lớn: độc quyền tại Go!, CoopMart, CoopFood. Hệ thống phân phối toàn quốc với hàng trăm điểm bán lẻ và đại lý.</p>
+                    </div>
+
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2 md:col-span-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-star text-xl"></i> Kênh đặc biệt</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Độc quyền cung cấp tại các chuỗi trạm dừng nghỉ cao tốc: Trạm Xuân Khiêm (Ninh Bình) và Trạm Đại Dương (Hoằng Hóa, Thanh Hóa) — điểm tiếp xúc với hàng triệu khách du lịch mỗi năm.</p>
+                    </div>
+
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-airplane-tilt text-xl"></i> Xuất khẩu</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Sản phẩm đã được xuất khẩu chính ngạch sang Hàn Quốc và Đài Loan — thị trường có tiêu chuẩn an toàn thực phẩm thuộc hàng khắt khe nhất châu Á.</p>
+                    </div>
+
+                    <div class="feature-card rounded-lg p-5 flex flex-col gap-2">
+                        <div class="text-brand-red font-bold flex items-center gap-2 text-base"><i class="ph-bold ph-buildings text-xl"></i> Dự án tương lai</div>
+                        <p class="text-slate-700 text-justify leading-relaxed">Khu Du lịch Nước mắm Ba Làng đang trong giai đoạn xây dựng, dự kiến hoàn thành năm 2028 — hệ sinh thái trải nghiệm thương hiệu theo chiều sâu, không đơn vị nào trong ngành hiện có được.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MỤC II -->
+            <section class="mb-12 reveal">
+                <h2 class="warning-blink">II. NHỮNG RỦI RO PHÁP LÝ ANH CẦN NẮM RÕ TRƯỚC KHI HỢP TÁC TRONG NGÀNH NÀY</h2>
+                <div class="bg-[#f0f4f8] rounded-xl p-6 border border-brand-blue/20">
+                    <p class="para font-medium italic text-brand-blue" style="text-indent: 0;">
+                        Chúng tôi chia sẻ phần này hoàn toàn với thiện chí. Một người làm nội dung nghiêm túc như anh xứng đáng được tiếp cận đầy đủ thông tin ngành trước khi đặt tên mình vào bất kỳ sản phẩm nào.
+                    </p>
+                    
+                    <div class="space-y-2 mt-4">
+                        <p class="para">
+                            <strong class="text-brand-blue">Thứ nhất — về nhãn hàng hóa:</strong> Theo Nghị định 43/2017/NĐ-CP và Thông tư 38/2012/TT-BNNPTNT, độ đạm (N) ghi trên nhãn nước mắm phải được kiểm định bởi cơ quan nhà nước có thẩm quyền — không phải con số doanh nghiệp tự công bố. Sản xuất và lưu thông sản phẩm ghi sai thông số kỹ thuật là vi phạm pháp luật. Tại Thanh Hóa, số cơ sở đủ điều kiện thực tế để sản xuất nước mắm đạt 40N trở lên và được kiểm định đầy đủ rất ít, và chúng tôi là một trong số đó.
+                        </p>
+                        <p class="para">
+                            <strong class="text-brand-blue">Thứ hai — về trách nhiệm của người quảng cáo:</strong> Theo Luật Quảng cáo 2012 (Điều 8, Khoản 9) và Luật Bảo vệ Quyền lợi Người tiêu dùng 2023, KOL và người ảnh hưởng trên mạng xã hội có thể bị xử lý hành chính hoặc liên đới dân sự nếu nội dung quảng cáo của họ chứa thông tin sai lệch về sản phẩm — kể cả trong trường hợp họ không chủ đích tạo ra thông tin sai đó. Mức xử phạt theo Nghị định 38/2021/NĐ-CP có thể lên tới 80 triệu đồng/vụ, kèm theo yêu cầu cải chính công khai — điều đặc biệt gây tổn hại nghiêm trọng đến uy tín của người làm nội dung.
+                        </p>
+                        <p class="para">
+                            <strong class="text-brand-blue">Thứ ba — về xu hướng quản lý KOL:</strong> Từ năm 2024, Bộ Thông tin và Truyền thông cùng Bộ Công Thương đã tăng cường giám sát nội dung quảng cáo của người ảnh hưởng trên mạng xã hội, đặc biệt trong lĩnh vực thực phẩm. Các vụ xử lý KOL vi phạm đã được thực thi công khai và có xu hướng ngày càng chặt chẽ hơn.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 bg-white p-5 rounded-lg border-l-4 border-green-600 shadow-sm">
+                        <p class="para font-medium text-green-900" style="text-indent: 0;">
+                            Khi hợp tác cùng Ba Làng TH, anh đứng sau một hệ thống chứng nhận đầy đủ: ISO 22000, HACCP, OCOP 4 Sao, kiểm định định kỳ bởi cơ quan nhà nước. Mọi thông số anh truyền tải đến cộng đồng đều có giấy tờ bảo chứng — <strong class="text-green-700">anh an toàn về mặt pháp lý và uy tín.</strong>
+                        </p>
+                        
+                        <!-- Nút bấm xem hồ sơ pháp lý CÓ BÀN TAY CHỈ DẪN -->
+                        <div class="mt-6 text-center md:text-left flex items-center justify-center md:justify-start gap-3">
+                            <i class="ph-fill ph-hand-pointing-right text-brand-red text-4xl animate-bounce-x"></i>
+                            <a href="https://drive.google.com/file/d/1PVmSm9Fb6Pf-8u8Y7wxG5D8_5kSQp113/view" target="_blank" class="inline-flex items-center gap-2 bg-[#0F4471] hover:bg-[#DA251D] text-white font-bold py-3 px-6 rounded-md transition-all duration-300 shadow-lg text-[15px] border border-[#0F4471] hover:border-[#DA251D] hover:scale-105 transform">
+                                <i class="ph-bold ph-file-pdf text-xl"></i> XEM BỘ HỒ SƠ & CHỨNG NHẬN PHÁP LÝ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MỤC III -->
+            <section class="mb-12 reveal">
+                <h2>III. QUYỀN LỢI KHI ĐỒNG HÀNH CÙNG BA LÀNG TH</h2>
+                
+                <div class="space-y-4 text-base" style="font-family: 'Inter', sans-serif;">
+                    <div class="flex flex-col md:flex-row border border-slate-200 rounded-lg overflow-hidden bg-white">
+                        <div class="bg-slate-50 font-bold text-brand-blue p-4 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 flex items-center">
+                            Phí hợp tác cố định
+                        </div>
+                        <div class="p-4 md:w-2/3 text-slate-700 text-justify leading-relaxed">
+                            Thỏa thuận theo từng giai đoạn; thanh toán đúng hạn, minh bạch qua hợp đồng có giá trị pháp lý đầy đủ.
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row border border-slate-200 rounded-lg overflow-hidden bg-white">
+                        <div class="bg-slate-50 font-bold text-brand-blue p-4 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 flex items-center">
+                            Hoa hồng doanh thu
+                        </div>
+                        <div class="p-4 md:w-2/3 text-slate-700 text-justify leading-relaxed">
+                            % trên doanh thu NET từ TikTok Shop và các kênh anh giới thiệu — không giới hạn mức trần.
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border border-slate-200 rounded-lg overflow-hidden bg-white">
+                        <div class="bg-slate-50 font-bold text-brand-blue p-4 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 flex items-center">
+                            Chuyến tham quan thực tế
+                        </div>
+                        <div class="p-4 md:w-2/3 text-slate-700 text-justify leading-relaxed">
+                            100% chi phí di chuyển và lưu trú do Ba Làng TH đài thọ. Anh tự mắt thấy toàn bộ cơ sở 12.000 m², khu sản xuất.
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border border-slate-200 rounded-lg overflow-hidden bg-white">
+                        <div class="bg-slate-50 font-bold text-brand-blue p-4 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 flex items-center">
+                            Vị trí độc quyền
+                        </div>
+                        <div class="p-4 md:w-2/3 text-slate-700 text-justify leading-relaxed">
+                            Gương mặt đại diện chính thức cho dòng nước mắm truyền thống cao cấp của Ba Làng TH — trong bối cảnh thương hiệu đang hiện diện từ siêu thị đến xuất khẩu quốc tế.
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-2 border-brand-red/30 rounded-lg overflow-hidden bg-white relative">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-brand-red"></div>
+                        <div class="bg-red-50 font-bold text-brand-red p-4 md:w-1/3 border-b md:border-b-0 md:border-r border-red-100 flex items-center">
+                            Bảo đảm pháp lý
+                        </div>
+                        <div class="p-4 md:w-2/3 text-slate-700 text-justify font-medium leading-relaxed">
+                            Toàn bộ thông tin sản phẩm anh truyền tải đều có chứng nhận nhà nước bảo chứng. Chúng tôi cam kết cung cấp đầy đủ hồ sơ pháp lý, chứng nhận chất lượng để bảo đảm tính xác thực cho nội dung truyền thông của anh, và chịu trách nhiệm cao nhất về tính pháp lý của sản phẩm trước cơ quan nhà nước.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MỤC IV -->
+            <section class="mb-12 reveal">
+                <h2>IV. VỊ THẾ CỦA HIỆP HỘI VÀ CAM KẾT BẢO VỆ THƯƠNG HIỆU BA LÀNG</h2>
+                <div>
+                    <p class="para">
+                        Với vai trò Chủ tịch Hiệp hội Nước mắm Ba Làng, chúng tôi có trách nhiệm pháp lý và đạo đức trong việc bảo vệ thương hiệu tập thể "Ba Làng" trước mọi hành vi sử dụng sai lệch, gây nhầm lẫn hoặc làm tổn hại đến danh tiếng của ngành. Đây là cam kết chúng tôi thực thi không ngoại lệ.
+                    </p>
+                    <p class="para">
+                        Thị trường nước mắm truyền thống đang bước vào giai đoạn tăng trưởng mạnh trên kênh số. Chúng tôi đang đầu tư nghiêm túc vào truyền thông và sẽ chủ động làm việc với những người sáng tạo nội dung uy tín nhất trong ngành ẩm thực. Đồng thời, với thẩm quyền của Hiệp hội, chúng tôi sẽ không để thị trường bị dẫn dắt bởi những nội dung không đúng chuẩn về sản phẩm mang tên Ba Làng — và chúng tôi có đủ công cụ pháp lý lẫn năng lực truyền thông để làm điều đó.
+                    </p>
+                </div>
+            </section>
+
+            <!-- MỤC V -->
+            <section class="mb-12 reveal">
+                <h2>V. LỜI MỜI CỤ THỂ</h2>
+                <div>
+                    <p class="para">
+                        Chúng tôi trân trọng mời anh Hùng Rơm đến thăm cơ sở tại Thanh Hóa: nhà máy 12.000 m², kho ủ chượp, hệ thống thanh trùng độc quyền, và dự án Khu Du lịch Nước mắm đang xây dựng. Chuyến đi hoàn toàn không kèm điều kiện — <strong class="text-brand-blue" style="font-family: 'Times New Roman', Times, serif;">anh tự mắt thấy, tự tay kiểm tra, và tự quyết định.</strong>
+                    </p>
+                    <p class="para">
+                        Ba Làng TH là bến đỗ dài hạn — cho một người làm nội dung muốn xây dựng uy tín bền vững gắn với câu chuyện thật, sản phẩm thật, và thương hiệu đủ tầm để xuất hiện từ trạm dừng chân cao tốc đến kệ siêu thị toàn quốc, từ thị trường nội địa đến Hàn Quốc, Đài Loan.
+                    </p>
+                    <p class="para">
+                        Nếu anh thấy đây là câu chuyện xứng đáng kể với cộng đồng của mình — chúng ta ký kết hợp đồng chính thức, minh bạch và bình đẳng. Nếu không, chúng tôi vẫn trân trọng cuộc gặp đó.
+                    </p>
+                    <p class="para">
+                        Trân trọng kính mời anh Hùng Rơm xem xét và phản hồi sớm. Chúng tôi sẵn sàng linh hoạt về thời gian và hình thức hợp tác phù hợp nhất.
+                    </p>
+                </div>
+            </section>
+
+            <!-- LỜI MỜI & CHỮ KÝ GIÁM ĐỐC -->
+            <section class="reveal flex flex-col items-end mb-10">
+                <div class="text-center w-full md:w-auto md:min-w-[280px]" style="font-family: 'Times New Roman', Times, serif; font-size: 19px;">
+                    <p class="font-bold text-brand-blue mb-1">ĐẠI DIỆN CÔNG TY</p>
+                    <p class="font-bold text-brand-blue mb-24">GIÁM ĐỐC</p>
+                    <p class="font-bold text-brand-blue mb-2 text-center">(Đã ký)</p>
+                    <p class="font-bold text-brand-blue uppercase">NGUYỄN QUANG HUY</p>
+                </div>
+            </section>
+
+            <!-- GẠCH PHÂN CÁCH -->
+            <hr class="border-t-2 border-slate-300 mb-8 reveal">
+
+            <!-- THÔNG TIN LIÊN HỆ -->
+            <section class="reveal text-base" style="font-family: 'Inter', sans-serif;">
+                <h3 class="font-bold text-brand-blue mb-6 uppercase text-[17px]">THÔNG TIN LIÊN HỆ</h3>
+                <ul class="space-y-5 text-slate-700">
+                    <li class="flex items-start gap-3">
+                        <i class="ph ph-user mt-1.5 text-brand-red text-lg"></i>
+                        <div class="leading-relaxed">
+                            <strong>Đại diện:</strong> Ông Nguyễn Quang Huy — CCO <br>
+                            Công ty TNHH Chế Biến Hải Sản Ba Làng
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="ph ph-phone mt-1 text-brand-red text-lg"></i>
+                        <div class="leading-relaxed">
+                            <strong>Số hotline công ty:</strong> <br>
+                            <span class="text-brand-blue font-bold text-[17px]">0986861627 - 0966861627</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="ph ph-envelope-simple mt-1 text-brand-red text-lg"></i>
+                        <div class="leading-relaxed">
+                            <strong>Email:</strong> <a href="mailto:balangth@balang.com.vn" class="text-brand-blue hover:underline">balangth@balang.com.vn</a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <div class="fixed bottom-0 left-0 w-full p-4 bg-white/95 backdrop-blur border-t border-slate-200 z-50 transform translate-y-full transition-transform duration-500 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]" id="cta-bar">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="hidden sm:block text-slate-600 font-medium">
+                Kết nối trực tiếp CCO Nguyễn Quang Huy
+            </div>
+            <div class="flex gap-3 w-full sm:w-auto">
+                <a href="tel:0986861627" class="flex-1 sm:flex-none flex justify-center items-center gap-2 bg-slate-100 hover:bg-slate-200 text-brand-blue font-bold py-3 px-6 rounded-lg transition-colors border border-slate-200">
+                    <i class="ph-fill ph-phone text-xl"></i>
+                    Gọi Điện
+                </a>
+                <a href="https://zalo.me/0986861627" target="_blank" class="flex-1 sm:flex-none flex justify-center items-center gap-2 bg-[#0068FF] hover:bg-[#0055d4] text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all transform hover:-translate-y-1">
+                    <i class="ph-fill ph-chat-circle-text text-xl"></i>
+                    Nhắn Zalo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPasswordInput() {
+            document.getElementById('open-btn').classList.add('hidden');
+            const passContainer = document.getElementById('password-container');
+            passContainer.classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('doc-password').focus();
+            }, 100);
+        }
+
+        function checkPassword() {
+            const pass = document.getElementById('doc-password').value;
+            const errorText = document.getElementById('password-error');
+            
+            if (pass === '19021997') {
+                errorText.classList.add('hidden');
+                openLetter();
+            } else {
+                errorText.classList.remove('hidden');
+                document.getElementById('doc-password').classList.add('border-2', 'border-red-500');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const passInput = document.getElementById('doc-password');
+            if(passInput) {
+                passInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        checkPassword();
+                    }
+                });
+            }
+        });
+
+        function openLetter() {
+            const envelope = document.getElementById('envelope');
+            const mainContent = document.getElementById('main-content');
+            const ctaBar = document.getElementById('cta-bar');
+
+            // Hiệu ứng mở bìa thư
+            envelope.classList.add('envelope-open');
+
+            // Hiển thị nội dung chính
+            setTimeout(() => {
+                mainContent.classList.remove('opacity-0');
+                
+                // Khởi tạo Scroll Observer để làm hiệu ứng fade-in mượt mà
+                const revealElements = document.querySelectorAll('.reveal');
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+                
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            obs.unobserve(entry.target); 
+                        }
+                    });
+                }, observerOptions);
+
+                revealElements.forEach(el => observer.observe(el));
+                
+                // Hiện thanh liên hệ ở dưới cùng
+                setTimeout(() => {
+                    ctaBar.classList.remove('translate-y-full');
+                }, 1500);
+
+            }, 600); 
+        }
+    </script>
+</body>
+</html>
